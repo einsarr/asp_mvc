@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DepartementEmploye.Models.Departement>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger">GESTION DES DEPARTEMENTS</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        Nouveau
+    </a>
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HOD)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HOD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Did })" class="btn btn-warning">edit</a>
+                <a href="@Url.Action("Details", new { id = item.Did })" class="btn btn-info">voir </a>
+                <a href="@Url.Action("Delete", new { id = item.Did })" onclick="return confirm('Etes-vous sûre de vouloir supprimer cet agent ?')" class="btn btn-danger">supprimer</a>
+            </td>
+        </tr>
+    }
+
+</table>

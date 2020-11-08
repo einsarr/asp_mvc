@@ -1,0 +1,67 @@
+﻿@model DepartementEmploye.Models.Employe
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Departement.DName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departement.DName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EGender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EGender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EDOB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EDOB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Eid }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,115 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<DepartementEmploye.Models.Employe>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-danger">GESTION DES EMPLOYES</h2>
+
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+
+
+            <div class="widget-body">
+
+                @using (Html.BeginForm("Index", "Employes", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <b> Departement</b>
+                                @Html.DropDownList("Departement", new SelectList(ViewBag.Departements, "Did", "DName"), "Selectionnez...", new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <b> Nom</b>
+                                @Html.TextBox("Nom", ViewBag.Nom as string, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <b> Salaire</b>
+                                @Html.TextBox("Salaire", ViewBag.Salaire as string, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div><input type="submit" value="Rechercher" class="btn btn-primary" /></div>
+
+                }
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">
+        Nouveau
+    </a>
+</p>
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Departement.DName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ESalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EGender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EDOB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UpdateDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departement.DName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ESalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EDOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id = item.Eid })" class="btn btn-warning">edit</a>
+                <a href="@Url.Action("Details", new { id = item.Eid })" class="btn btn-info">voir </a>
+                <a href="@Url.Action("Delete", new { id = item.Eid })" onclick="return confirm('Etes-vous sûre de vouloir supprimer cet agent ?')" class="btn btn-danger">supprimer</a>
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, Departement = ViewBag.Departement, Nom = ViewBag.Nom, Salaire = ViewBag.Salaire }))
